@@ -166,7 +166,7 @@ public class PictureMatcher {
             return;
         }
         System.out.println("File names calculated. Writing mapping file.");
-        File mappingFile = new File(Paths.get(path).toAbsolutePath() + "/mapping.txt");
+        File mappingFile = new File(Paths.get(path).toAbsolutePath() + "/matching.txt");
         try {
             if (!mappingFile.exists()) mappingFile.createNewFile();
             PrintWriter writer = new PrintWriter(new FileOutputStream(mappingFile));
