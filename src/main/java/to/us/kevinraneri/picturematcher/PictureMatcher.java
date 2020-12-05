@@ -153,7 +153,6 @@ public class PictureMatcher {
                 System.out.print("                                                            \r");
                 System.out.println(format("Unable to read EXIF data for file %s", jpegFile.getAbsolutePath()));
             }
-            System.out.println("");
         }
     
         System.out.print("                                                            \r");
@@ -161,7 +160,6 @@ public class PictureMatcher {
     
         List<Group> groups = new ArrayList<>();
     
-        System.out.println("Indexing sony hashes...");
         for (Entry<File, byte[]> entry : fileToSonyHash.entrySet()) {
             // First we find a matching group for the sony hash, or create one if it hasn't been indexed.
             Group target = null;
@@ -178,7 +176,6 @@ public class PictureMatcher {
             target.getFiles().add(entry.getKey());
         }
         System.out.println("Indexed " + fileToSonyHash.size() + " files by sony hash");
-        System.out.println("Populating base hashes for discovered groups...");
     
         for (Group group : groups) {
             for (File file : group.getFiles()) {
@@ -196,8 +193,6 @@ public class PictureMatcher {
                 }
             }
         }
-        System.out.println("Finished populating base hashes for discovered groups.");
-        System.out.println("Filling in groups with files that have no sony hashes...");
     
         for (Entry<File, byte[]> entry : fileToBaseHash.entrySet()) {
             if (fileToSonyHash.containsKey(entry.getKey())) continue;
@@ -216,8 +211,6 @@ public class PictureMatcher {
             
             target.getFiles().add(entry.getKey());
         }
-        System.out.println("All file groups have been generated.");
-        System.out.println("Filtering groups with more than two files.");
     
         for (Group group : groups) {
             if (group.getFiles().size() > 2) {
