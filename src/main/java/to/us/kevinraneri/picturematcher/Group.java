@@ -6,9 +6,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import lombok.Data;
 
-@Data
 public class Group {
 	
 	private byte[] baseHash;
@@ -43,5 +41,33 @@ public class Group {
 		}
 		
 		return removeFileExtension(deepestFile.getName());
+	}
+
+	public byte[] getBaseHash() {
+		return baseHash;
+	}
+
+	public void setBaseHash(byte[] baseHash) {
+		this.baseHash = baseHash;
+	}
+
+	public byte[] getSonyHash() {
+		return sonyHash;
+	}
+
+	public void setSonyHash(byte[] sonyHash) {
+		this.sonyHash = sonyHash;
+	}
+
+	public boolean isIgnored() {
+		return ignored;
+	}
+
+	public void setIgnored(boolean ignored) {
+		this.ignored = ignored;
+	}
+
+	public Set<File> getFiles() {
+		return files;
 	}
 }

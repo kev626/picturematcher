@@ -8,13 +8,13 @@ import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
 import com.drew.metadata.exif.makernotes.SonyType1MakernoteDirectory;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -137,7 +137,7 @@ public class PictureMatcher {
         
                     digest.reset();
                     sonyDos.write(initialData);
-                    sonyDos.write(sonyDir.getByteArray(0x9400));
+                    // sonyDos.write(sonyDir.getByteArray(0x9400)); // This is actually completely unnecessary.
                     sonyDos.write(hash);
                     sonyDos.flush();
                     sonyDos.close();
@@ -344,4 +344,14 @@ public class PictureMatcher {
         return file.substring(0, file.lastIndexOf("."));
     }
 
+    private static final byte[] HEX_ARRAY = "0123456789ABCDEF".getBytes(StandardCharsets.US_ASCII);
+    public static String bytesToHex(byte[] bytes) {
+        byte[] hexChars = new byte[bytes.length * 2];
+        for (int j = 0; j < bytes.length; j++) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = HEX_ARRAY[v >>> 4];
+            hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
+        }
+        return new String(hexChars, StandardCharsets.UTF_8);
+    }
 }
