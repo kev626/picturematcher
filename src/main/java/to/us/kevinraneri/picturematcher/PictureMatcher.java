@@ -38,7 +38,6 @@ import static java.lang.String.format;
 public class PictureMatcher {
     
     public static final int[] tags = new int[] {
-            0x829A,
             0x829D,
             0x8827,
             0x8832,
