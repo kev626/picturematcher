@@ -38,18 +38,11 @@ import static java.lang.String.format;
 public class PictureMatcher {
     
     public static final int[] tags = new int[] {
-            0x829D,
-            0x8827,
-            0x8832,
+            0x010f,
+            0x0110,
+            0xa431,
             0x9003,
-            0x9004,
-            0x9203,
-            0x9204,
-            0x9205,
-            0x920A,
-            0x9290,
             0x9291,
-            0x9292,
     };
 
     public static void main(String[] args) {
@@ -116,7 +109,7 @@ public class PictureMatcher {
                 for (int tag : tags) {
                     String str = directory.getString(tag);
                     if (str == null) continue;
-                    
+
                     byte[] bytes = str.getBytes();
                     baseDos.write(bytes);
                 }
